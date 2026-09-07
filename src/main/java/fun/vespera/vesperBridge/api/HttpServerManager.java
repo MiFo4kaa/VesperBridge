@@ -1,6 +1,7 @@
 package fun.vespera.vesperBridge.api;
 
 import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import fun.vespera.vesperBridge.VesperBridge;
 
@@ -27,14 +28,17 @@ public class HttpServerManager {
             server = HttpServer.create(new InetSocketAddress(host, port), 0);
 
             WhitelistHandler whitelistHandler = new WhitelistHandler(plugin.getWhitelistManager());
+            GroupHandler groupHandler = new GroupHandler();
             AuthFilter authFilter = new AuthFilter(token);
 
-            // Регистрация эндпоинтов вайтлиста
+            // Эндпоинты вайтлиста
             registerContext("/api/whitelist/add", whitelistHandler, authFilter);
             registerContext("/api/whitelist/remove", whitelistHandler, authFilter);
             registerContext("/api/whitelist/list", whitelistHandler, authFilter);
 
-            // Виртуальный пул или фиксированный пул потоков для асинхронного обслуживания HTTP
+            // Эндпоинт для групп
+            registerContext("/api/groups/bloom", groupHandler, authFilter);
+
             server.setExecutor(Executors.newFixedThreadPool(4));
             server.start();
 
@@ -44,7 +48,8 @@ public class HttpServerManager {
         }
     }
 
-    private void registerContext(String path, WhitelistHandler handler, AuthFilter filter) {
+    // Приведите метод к универсальному HttpHandler:
+    private void registerContext(String path, HttpHandler handler, AuthFilter filter) {
         HttpContext context = server.createContext(path, handler);
         context.getFilters().add(filter);
     }

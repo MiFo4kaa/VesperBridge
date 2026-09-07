@@ -25,3 +25,9 @@ permissions:
   vesperbridge.whitelist.list:
     description: Просмотр списка игроков вайтлиста
     default: op
+
+dependencies:
+  server:
+    LuckPerms:
+      load: BEFORE
+      required: true
