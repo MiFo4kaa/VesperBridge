@@ -4,23 +4,19 @@ version: '${version}'
 main: fun.vespera.vesperBridge.VesperBridge
 api-version: '1.21.11'
 load: POSTWORLD
-commands:
-  vwl:
-    description: Управление кастомным whitelist
-    permission: vesperbridge.whitelist.use
 permissions:
   vesperbridge.whitelist.use:
-    description: Базовый доступ к команде vwl
+    description: Доступ к использованию команды /vwl
     default: op
   vesperbridge.whitelist.add:
-    description: Добавление в whitelist
+    description: Добавление игроков в whitelist
     default: op
   vesperbridge.whitelist.remove:
-    description: Удаление из whitelist
+    description: Удаление игроков из whitelist
     default: op
   vesperbridge.whitelist.reload:
-    description: Перезагрузка whitelist
+    description: Перезагрузка конфигурации и вайтлиста
     default: op
   vesperbridge.whitelist.list:
-    description: Просмотр списка whitelist
+    description: Просмотр списка игроков вайтлиста
     default: op

@@ -1,7 +1,7 @@
 package fun.vespera.vesperBridge.whitelistUtils;
 
+import fun.vespera.vesperBridge.MessageManager;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -10,9 +10,11 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 public class WhitelistListener implements Listener {
 
     private final WhitelistManager whitelistManager;
+    private final MessageManager messageManager;
 
-    public WhitelistListener(WhitelistManager whitelistManager) {
+    public WhitelistListener(WhitelistManager whitelistManager, MessageManager messageManager) {
         this.whitelistManager = whitelistManager;
+        this.messageManager = messageManager;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -20,11 +22,8 @@ public class WhitelistListener implements Listener {
         String username = event.getName();
 
         if (!whitelistManager.isWhitelisted(username)) {
-            // Форматирование кик-сообщения (Kyori Adventure)
-            Component kickMessage = Component.text("Вы не добавлены в белый список сервера!\n", NamedTextColor.RED)
-                    .append(Component.text("Подайте заявку на нашем Discord сервере.", NamedTextColor.GRAY));
-
-            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST, kickMessage);
+            Component kickReason = messageManager.getRaw("kick-message");
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST, kickReason);
         }
     }
 }

@@ -1,0 +1,16 @@
+prefix: "<dark_gray>[<gradient:#5e4fa2:#f79459>VesperBridge</gradient>]<reset> "
+no-permission: "<red>У вас недостаточно прав для выполнения этой команды!"
+usage: "<red>Использование: <yellow>/vwl <add|remove|reload|list>"
+usage-add: "<red>Использование: <yellow>/vwl add <ник>"
+usage-remove: "<red>Использование: <yellow>/vwl remove <ник>"
+unknown-subcommand: "<red>Неизвестное поддействие! Доступно: <yellow>add, remove, reload, list"
+
+player-added: "<green>Игрок <white><player></white> успешно добавлен в whitelist!"
+player-already-whitelisted: "<yellow>Игрок <white><player></white> уже находится в whitelist."
+player-removed: "<green>Игрок <white><player></white> удален из whitelist!"
+player-not-found: "<red>Игрок <white><player></white> не найден в whitelist."
+
+whitelist-reloaded: "<green>Конфигурация и список игроков успешно перезагружены!"
+whitelist-list: "<aqua>Игроков в whitelist (<count>): <white><players></white>"
+
+kick-message: "<red><bold>Доступ ограничен!</bold></red>\n\n<gray>Вы не добавлены в белый список сервера.\n<yellow>Подайте заявку в нашем Discord: <underlined><click:open_url:'https://discord.gg/your-invite'>discord.gg/your-invite</click></underlined>"

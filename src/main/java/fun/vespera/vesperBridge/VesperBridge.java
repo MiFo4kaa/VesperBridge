@@ -8,17 +8,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class VesperBridge extends JavaPlugin {
 
     private WhitelistManager whitelistManager;
+    private MessageManager messageManager;
 
     @Override
     public void onEnable() {
-        // Инициализация менеджера
+        this.messageManager = new MessageManager(this);
         this.whitelistManager = new WhitelistManager(this);
 
-        // Регистрация листенера
-        getServer().getPluginManager().registerEvents(new WhitelistListener(this.whitelistManager), this);
+        getServer().getPluginManager().registerEvents(
+                new WhitelistListener(this.whitelistManager, this.messageManager),
+                this
+        );
 
-        // Регистрация команды
-        VwlCommand vwlCommand = new VwlCommand(this.whitelistManager);
+        VwlCommand vwlCommand = new VwlCommand(this.whitelistManager, this.messageManager);
         if (getCommand("vwl") != null) {
             getCommand("vwl").setExecutor(vwlCommand);
             getCommand("vwl").setTabCompleter(vwlCommand);
@@ -27,5 +29,9 @@ public final class VesperBridge extends JavaPlugin {
 
     public WhitelistManager getWhitelistManager() {
         return whitelistManager;
+    }
+
+    public MessageManager getMessageManager() {
+        return messageManager;
     }
 }
