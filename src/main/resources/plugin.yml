@@ -4,6 +4,11 @@ version: '${version}'
 main: fun.vespera.vesperBridge.VesperBridge
 api-version: '1.21.11'
 load: POSTWORLD
+
+commands:
+  vwl:
+    description: Управление кастомным whitelist
+    permission: vesperbridge.whitelist.use
 permissions:
   vesperbridge.whitelist.use:
     description: Доступ к использованию команды /vwl
