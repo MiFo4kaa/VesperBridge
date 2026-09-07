@@ -1,0 +1,6 @@
+name: VesperBridge
+version: '${version}'
+
+main: fun.vespera.vesperBridge.VesperBridge
+api-version: '1.21.11'
+load: POSTWORLD
